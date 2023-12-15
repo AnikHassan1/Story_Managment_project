@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "story12", "story123", "store_db");
+ require('connection.php') ;
 
 ?>
 
