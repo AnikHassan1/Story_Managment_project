@@ -35,6 +35,13 @@ if (isset($_POST['Update'])) {
     }
 }
 ?>
+<?php 
+        $sql= "SELECT * FROM catagory";
+        $result= $conn->query($sql);
+        
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +57,15 @@ if (isset($_POST['Update'])) {
         Product Name: <br>
         <input type="text" name="Product_name" value="<?php echo $name ?>"><br><br>
         Product Category: <br>
-        <input type="text" name="Product_category" value="<?php echo  $Product_category ?>"><br><br>
+        <select name="Product_category" >
+        <?php 
+      while($data = $result->fetch_assoc()){
+        $category_id=$data['Catagory_id'];
+        $category_name=$data['Catagory_name'];
+       echo "<option value='$category_id'>$category_name</option>";}
+        ?>
+    
+    </select><br><br>
         Product Code: <br>
         <input type="text" name="Product_code" value="<?php echo $Product_code ?>"><br><br>
         Product Entry Date: <br>

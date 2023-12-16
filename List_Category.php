@@ -16,7 +16,7 @@
     <tr>
     <th>Catagory_ID</th>
     <th>Catagory_name</th>
-    <th>Catagory_name</th>
+    <th>Catagory_entyDate</th>
     <th>Action</th>
     </tr>
     ";
