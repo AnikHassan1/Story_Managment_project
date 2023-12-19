@@ -1,9 +1,7 @@
+
+
 <?php
 require("connection.php");
-session_start();
-$user_name= $_SESSION['user_name'];
-$user_lname=$_SESSION['user_last_name'];
-if(!empty($user_name) && !empty($user_lname)){
 ?>
 
 
@@ -13,7 +11,7 @@ if(!empty($user_name) && !empty($user_lname)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADD Product</title>
+    <title>Users</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
@@ -38,12 +36,12 @@ if(!empty($user_name) && !empty($user_lname)){
                         <div class="container p-4 m-4">
                             <?php
                             if (isset($_POST['submit'])) {
-                                $pname      = $_POST['Product_name'];
-                                $Category   = $_POST['Product_category'];
-                                $pCode      = $_POST['Product_code'];
-                                $pEntryDate = $_POST['Product_EntryDate'];
+                                $username      = $_POST['User_Frist_Name'];
+                                $userlname   = $_POST['User_Last_Name'];
+                                $userEmail      = $_POST['User_Email'];
+                                $userpassword = $_POST['User_Password'];
 
-                                $SQL = "INSERT INTO product(Product_name,Product_category,Product_code,Product_EntryDate) VALUES('$pname','$Category','$pCode','$pEntryDate')";
+                                $SQL = "INSERT INTO user(User_Frist_Name,User_Last_Name,User_Email,User_Password) VALUES('$username','$userlname','$userEmail','$userpassword')";
 
                                 if ($conn->query($SQL) === TRUE) {
                                     echo " Insert Data";
@@ -52,36 +50,20 @@ if(!empty($user_name) && !empty($user_lname)){
                                 }
                             }
                             ?>
-                            <?php
-                            $sql = "SELECT * FROM catagory";
-                            $result = $conn->query($sql);
-
-
-
-                            ?>
                             <div class="card shadow-lg" style="width: 18rem;">
                                 <div class="card-body">
                                     <div class="card-text">
-                                        <h3 class="text-center text-success">ADD Product</h3>
+                                        <h3 class="text-center text-success">User </h3>
                                         <form class="text-success" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                                            Product :<br>
-                                            <input class="mt-2" type="text" name="Product_name" id=""><br><br>
-                                            Category :<br>
-                                            <select name="Product_category">
-                                                <?php
-                                                while ($data = $result->fetch_assoc()) {
-                                                    $category_id = $data['Catagory_id'];
-                                                    $category_name = $data['Catagory_name'];
-                                                    echo "<option value='$category_id'>$category_name</option>";
-                                                }
-                                                ?>
-
-                                            </select><br><br>
-                                            <!-- <input type="text" name="Product_category" id=""><br><br> -->
-                                            Product_code :<br>
-                                            <input  class="mt-2" type="text" name="Product_code" id=""><br><br>
-                                            Product_EntryDate :<br>
-                                            <input  class="mt-2" type="date" name="Product_EntryDate" id=""><br><br>
+                                           First Name :<br>
+                                            <input class="mt-2" type="text" name="User_Frist_Name" id="" required><br><br>
+                                           Last Name :<br>
+                                            <input type="text" name="User_Last_Name" required><br><br>
+                                            
+                                            User Email :<br>
+                                            <input  class="mt-2" type="email" name="User_Email" id=""><br><br>
+                                            User Password :<br>
+                                            <input  class="mt-2" type="password" name="User_Password" id=""><br><br>
                                             <input class="btn btn-success ms-5" type="submit" value="submit" name="submit">
                                         </form>
                                     </div>
@@ -103,8 +85,3 @@ if(!empty($user_name) && !empty($user_lname)){
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
 </html>
-<?php
-}else{
-    header('location:login.php'); 
-}
-?>
